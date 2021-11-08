@@ -18,7 +18,7 @@ import java.util.Scanner;
  */
 public class App {
     private Scanner scanner = new Scanner(System.in);
-    private List<Shoe> shoes = new ArrayList<>();
+    private Shoe[] shoes = new Shoe[10];
 
     public void run(){
         String repeat = "yes";
@@ -53,26 +53,24 @@ public class App {
                     shoe.setShoeName(scanner.nextLine());
                     System.out.print("Введите цену обуви: ");
                     shoe.setShoePrise(scanner.nextInt());
-//                    book.setAuthors(authors);
-//                    System.out.print("Введите год издания книги: ");
-//                    book.setReleaseYear(scanner.nextInt());scanner.nextLine();
-//                    System.out.print("Введите количество экземпляров книги: ");
-//                    book.setQuantity(scanner.nextInt());scanner.nextLine();
-//                    book.setCount(book.getQuantity());
-//                    System.out.println("Книга инициирована: "+book.toString());    
-//                    books.add(book);
-//                    saverToFiles.saveBooks(books);
+                    for (int i = 0; i < shoes.length; i++) {
+                        if(shoes[i] == null){
+                            shoes[i] = shoe;
+                            break;
+                        }
+                    }
                     break;
+                    
                 case 3:
                     System.out.println("Список обуви: ");
-                    for (int i = 0; i < shoes.size(); i++) {
-                        if(shoes.get(i) != null){
-                            System.out.printf("%d. %s. %d.%n"
+                    for (int i = 0; i < shoes.length; i++) {
+                        if(shoes[i] != null){
+                            System.out.printf("%d. %s %d"+"$"+"%n"
                                         ,i+1
-                                        ,shoes.get(i).getShoeName()
-                                        ,shoes.get(i).getShoePrise()
+                                        ,shoes[i].getShoeName()
+                                        ,shoes[i].getShoePrise()
                             );
-                        }
+                        }   
                     }
                     break;
                 default:

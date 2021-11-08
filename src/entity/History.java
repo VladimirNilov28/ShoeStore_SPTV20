@@ -5,12 +5,24 @@
  */
 package entity;
 
+import java.util.Date;
+
 /**
  *
  * @author user
  */
 public class History {
+    private Shoe shoe;
     private Customer customer;
+    private Date givenShoe;
+
+    public Shoe getShoe() {
+        return shoe;
+    }
+
+    public void setShoe(Shoe shoe) {
+        this.shoe = shoe;
+    }
 
     public Customer getCustomer() {
         return customer;
@@ -19,5 +31,12 @@ public class History {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-    
+
+    public Date getGivenShoe() {
+        return givenShoe;
+    }
+
+    public void setGivenShoe(Date givenShoe) {
+        this.givenShoe = givenShoe;
+    }
 }
