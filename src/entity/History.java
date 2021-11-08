@@ -15,7 +15,11 @@ public class History {
     private Shoe shoe;
     private Customer customer;
     private Date givenShoe;
-
+    
+    public History(){
+        
+    }
+    
     public Shoe getShoe() {
         return shoe;
     }
