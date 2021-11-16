@@ -12,7 +12,6 @@ package entity;
 public class Shoe {
     private String shoeName;
     private int shoePrise;
-    private int quantity;
     private int count;
     
     public Shoe(){
@@ -35,14 +34,6 @@ public class Shoe {
         this.shoePrise = shoePrise;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public int getCount() {
         return count;
     }
@@ -53,7 +44,7 @@ public class Shoe {
 
     @Override
     public String toString() {
-        return "Shoe{" + "shoeName=" + shoeName + ", shoePrise=" + shoePrise + ", quantity=" + quantity + ", count=" + count + '}';
+        return "Shoe{" + "shoeName=" + shoeName + ", shoePrise=" + shoePrise + ", count=" + count + '}';
     }
     
 }

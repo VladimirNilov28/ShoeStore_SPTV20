@@ -29,10 +29,8 @@ public class App {
 
     public void run(){
         
-        History history = new History();
         Income income = new Income();
-        Shoe shoe = new Shoe();
-        Customer customer = new Customer();
+        History history = new History();
         
         String repeat = "yes";
         do{
@@ -43,15 +41,15 @@ public class App {
             System.out.println("3: Список продаваемых моделей");
             System.out.println("4: Покупка покупателем обуви");
             System.out.println("5: Добавить денег покупателю");
-            System.out.println("6: Список зарегистрированных покупателей");
+            System.out.println("6: Список зарегистрированных покупателей*");
             System.out.println("7: Доход магазина за все время работы");
-            System.out.println("8: Список покупателей");
             int task = scanner.nextInt(); scanner.nextLine();
             switch (task) {
                 case 0:
                     repeat = "no";
                     break;
                 case 1:
+                    Customer customer = new Customer();
                     System.out.print("Введите имя покупателя: ");
                     customer.setCustumerName(scanner.nextLine());
                     System.out.print("Введите телефон покупателя: ");
@@ -67,10 +65,13 @@ public class App {
                     }
                     break;
                 case 2:
+                    Shoe shoe = new Shoe();
                     System.out.print("Введите название обуви: ");
                     shoe.setShoeName(scanner.nextLine());
                     System.out.print("Введите цену обуви: ");
                     shoe.setShoePrise(scanner.nextInt());
+                    System.out.print("Введите кол-во обуви: ");
+                    shoe.setCount(scanner.nextInt());
                     for (int i = 0; i < shoes.length; i++) {
                         if(shoes[i] == null){
                             shoes[i] = shoe;
@@ -81,27 +82,43 @@ public class App {
                     
                 case 3:
                     System.out.println("Список обуви: ");
+                    int c = 0;
                     for (int i = 0; i < shoes.length; i++) {
-                        if(shoes[i] != null){
-                            System.out.printf("%d. %s %d"+"$"+"%n"
+                        if(shoes[i] != null &&
+                                shoes[i].getCount() != 0 &&
+                                shoes[i].getCount() > 0){
+                            System.out.printf("%d. %s %d$ %d штук(а/и) %n"
                                         ,i+1
                                         ,shoes[i].getShoeName()
                                         ,shoes[i].getShoePrise()
+                                        ,shoes[i].getCount()
                             );
-                        }   
+                            c++;
+                        }
+                    }
+                    if(c == 0){
+                        System.out.println("К сожелению обуви нет :( ");
                     }
                     break;
                 
                 case 4:
                     System.out.println("Список обуви: ");
                     for (int i = 0; i < shoes.length; i++) {
-                        if(shoes[i] != null){
-                            System.out.printf("%d. %s %d"+"$"+"%n"
+                        if(shoes[i] != null &&
+                                shoes[i].getCount() != 0 &&
+                                shoes[i].getCount() > 0){
+                            System.out.printf("%d. %s %d$ %d штук(а/и) %n"
                                         ,i+1
                                         ,shoes[i].getShoeName()
                                         ,shoes[i].getShoePrise()
+                                        ,shoes[i].getCount()
                             );
-                        }   
+                        }
+                        else if(shoes[i].getCount() == 0 &&
+                                shoes[i].getCount() < 0){
+                            System.out.println("К сожелению обуви нет :( ");
+                            break;
+                        }
                     }
                     
                     System.out.println("Выберите номер обуви: ");
@@ -132,6 +149,7 @@ public class App {
                                             history.getCustomer().getCustumerPhone()
                                 );
                             history.getCustomer().setCusumerMoney(history.getCustomer().getCusumerMoney()-history.getShoe().getShoePrise());
+                            history.getShoe().setCount(history.getShoe().getCount()-1);
                             income.setIncome(income.getIncome()+history.getShoe().getShoePrise());
                             if(histories[i] == null){
                                 histories[i] = history;
@@ -141,13 +159,14 @@ public class App {
                     }
                     else {
                         System.out.println("У вас недостаточно средств! ");
-                        break;
                     }
-                case 8: 
-                    System.out.println("Список покупателей: ");
+                    break;
+                case 5:
+                    System.out.println("-Пополнение баланса-");
+                    System.out.println("Выберите пользователя: ");
                     for (int i = 0; i < customers.length; i++) {
                         if(customers[i] != null){
-                            System.out.printf("%d. %s %d."+"$"+" тел.: %s%n"
+                            System.out.printf("%d. %s %d"+"$"+" тел.: %s%n"
                                         ,i+1
                                         ,customers[i].getCustumerName()
                                         ,customers[i].getCusumerMoney()
@@ -155,6 +174,27 @@ public class App {
                             );
                         }
                     }
+                    numberCustomer = scanner.nextInt(); scanner.nextLine();
+                    System.out.println("Введите сумму для пополнения: ");
+                    int addMoney = scanner.nextInt(); scanner.nextLine();
+                    history.setCustomer(customers[numberCustomer - 1]);
+                    history.getCustomer().setCusumerMoney(history.getCustomer().getCusumerMoney()+addMoney);
+                    break;
+                case 6: 
+                    System.out.println("Список покупателей: ");
+                    for (int i = 0; i < customers.length; i++) {
+                        if(customers[i] != null){
+                            System.out.printf("%d. %s %d"+"$"+" тел.: %s%n"
+                                        ,i+1
+                                        ,customers[i].getCustumerName()
+                                        ,customers[i].getCusumerMoney()
+                                        ,customers[i].getCustumerPhone()
+                            );
+                        }
+                    }
+                    break;
+                case 7:
+                    System.out.println("доход за всё веремя равен: " + income.getIncome());
                     break;
                 default:
                     System.out.println("Выберите номер из списка!");
