@@ -15,6 +15,7 @@ public class Customer {
     private int cusumerMoney;
 
     public Customer() {
+        
     }
     
     public String getCustumerName() {

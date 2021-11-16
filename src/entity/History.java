@@ -12,6 +12,7 @@ import java.util.Date;
  * @author user
  */
 public class History {
+    private Income income;
     private Shoe shoe;
     private Customer customer;
     private Date givenShoe;
@@ -42,5 +43,13 @@ public class History {
 
     public void setGivenShoe(Date givenShoe) {
         this.givenShoe = givenShoe;
+    }
+
+    public Income getIncome() {
+        return income;
+    }
+
+    public void setIncome(Income income) {
+        this.income = income;
     }
 }
